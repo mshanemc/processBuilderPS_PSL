@@ -7,7 +7,10 @@ public with sharing class PBBAddPSL {
 
 		for (AddPSLRequest request:dedupe(requests)){
 			//future methods can only accept primitives, so we serialize to a list of string
-			output.add(JSON.serialize(request));
+			// output.add(JSON.serialize(request));
+			PermissionSetLicenseAssign PSLA = new PermissionSetLicenseAssign();
+			PSLA.AssigneeId = request.UserId;
+			PSLA.PermissionSetLicenseId = request.PermissionSetLicenseId;
 		}
 
 		AddPermsLater(output);
