@@ -5,15 +5,18 @@ public with sharing class PBBAddPSL {
 
 		list<string> output = new list<string>();
 
+		list<PermissionSetLicenseAssign> PSLAs = new list<PermissionSetLicenseAssign>();
+
 		for (AddPSLRequest request:dedupe(requests)){
 			//future methods can only accept primitives, so we serialize to a list of string
 			// output.add(JSON.serialize(request));
 			PermissionSetLicenseAssign PSLA = new PermissionSetLicenseAssign();
 			PSLA.AssigneeId = request.UserId;
 			PSLA.PermissionSetLicenseId = request.PermissionSetLicenseId;
+			PSLAs.add(PSLA);
 		}
 
-		AddPermsLater(output);
+		insert PSLAs;
 
 	}
 
